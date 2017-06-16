@@ -3,33 +3,19 @@
 <head>
     <meta charset="utf-8">
     <title>Curso GIS - visor simple Open Layers</title>
-    <!-- Tell the browser to be responsive to screen width -->
+    <!-- dise;o responsivo -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <!-- USAMOS LA VERSION 2.12 DE OPENLAYERS -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/theme/default/style.min.css"> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/lib/OpenLayers.min.js"></script> -->
-    <link rel="stylesheet" href="style.css">
-    <script src="OpenLayers.js"></script>
-    <style>
-        html, body{
-            height: 100%;
-            width: 100%;
-            margin: 0;
-        }
-        .cabecera{
-            height: 50px;
-            background-color: lightBlue;
-        }
-        #miMapa{
-            height: 500px;
-            width: 600px;
-            border: solid 3px;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/theme/default/style.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/OpenLayers.min.js"></script>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="myStyle.css">
+    <!-- <script src="OpenLayers.js"></script> -->
 </head>
 <body>
     <div class="cabecera">Visor simple Open Layers</div>
     <div id="miMapa"></div>
+    <script src="myScript.js"></script>
 </body>
 </html>

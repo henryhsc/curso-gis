@@ -1,0 +1,17 @@
+html, body{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+.cabecera{
+    height: 50px;
+    background-color: #336699;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+}
+#miMapa{
+    height: 500px;
+    width: 600px;
+    border: solid 3px;
+}
