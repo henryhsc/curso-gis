@@ -13,6 +13,9 @@ var inicio = function () {
         ]
     };
     var map = new OpenLayers.Map("miMapa", propiedades);     // parametro: el ID del contenedor
+
+    var layerOSM = new OpenLayers.Layer.OSM();
+    map.addLayer(layerOSM);
 }
 // iniciamos la funcion para desplegar el mapa
 window.onload = inicio;
