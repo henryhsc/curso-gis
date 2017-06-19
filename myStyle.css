@@ -6,6 +6,7 @@
 .cabecera{
     height: 50px;
     background-color: #336699;
+    top: 15px;
     color: #ffffff;
     font-size: 20px;
     font-weight: bold;
