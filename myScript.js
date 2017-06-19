@@ -34,7 +34,7 @@ var inicio = function () {
         layerGoogle,
         layerGoogleHibrido,
         layerGoogleTerrain
-    ])
+    ]);
 
     // control para intercambio de capas
     var controlCapas = new OpenLayers.Control.LayerSwitcher();
