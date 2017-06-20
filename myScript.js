@@ -17,7 +17,7 @@ var inicio = function () {
     // capa OSM
     var layerOSM = new OpenLayers.Layer.OSM();
     map.addLayer(layerOSM);
-    //map.setCenter(new OpenLayers.LonLat(-63.5887, -16.2902), 4);*/
+    //map.setCenter(new OpenLayers.LonLat(-16.2902, -63.5887), 5);
 
     // capa googleapi
     var layerGoogle = new OpenLayers.Layer.Google("Mapa Satelital", {
@@ -40,6 +40,14 @@ var inicio = function () {
     var controlCapas = new OpenLayers.Control.LayerSwitcher();
     map.addControl(controlCapas);
 
+    // control de posicion del cursor
+    var controlCursor = new OpenLayers.Control.MousePosition();
+    map.addControl(controlCursor);
+
+    // control mini mapa
+    var controlMiniMapa = new OpenLayers.Control.OverviewMap();
+    map.addControl(controlMiniMapa);
+
     // capa stamen
     var layerStamen = new OpenLayers.Layer.Stamen("toner");
     map.addLayer(layerStamen);
@@ -59,6 +67,16 @@ var inicio = function () {
 
     map.addLayer(layerMapBox);
 
+    // capas utilizando servicios web WMS (Web Map Service)
+    var layerDepartamentos = new OpenLayers.Layer.WMS(
+        "Departamentos Bolivia",                // se pasa un nombre del layer
+        "http://geo.gob.bo/geoserver/wms",     // url del servicio a consumir
+        {
+            layers: 'fondos:departamento1',     // workspace:capa
+            transparent: false
+        }
+    );
+    map.addLayer(layerDepartamentos);
 }
 // iniciamos la funcion para desplegar el mapa
 window.onload = inicio;
