@@ -39,6 +39,26 @@ var inicio = function () {
     // control para intercambio de capas
     var controlCapas = new OpenLayers.Control.LayerSwitcher();
     map.addControl(controlCapas);
+
+    // capa stamen
+    var layerStamen = new OpenLayers.Layer.Stamen("toner");
+    map.addLayer(layerStamen);
+
+    // layer map box
+    var layerMapBox = new OpenLayers.Layer.XYZ('MapBox', [
+		    "http://b.tiles.mapbox.com/v3/isawnyu.map-knmctlkh/${z}/${x}/${y}.png",
+        	"http://c.tiles.mapbox.com/v3/isawnyu.map-knmctlkh/${z}/${x}/${y}.png",
+        	"http://d.tiles.mapbox.com/v3/isawnyu.map-knmctlkh/${z}/${x}/${y}.png"
+		    ],
+            {
+                sphericalMercator: true,
+                //tileSize: new OpenLayers.Size([512, 512]),
+                wrapDateLine: true,
+            	numZoomLevels: 19
+    });
+
+    map.addLayer(layerMapBox);
+
 }
 // iniciamos la funcion para desplegar el mapa
 window.onload = inicio;
