@@ -88,6 +88,31 @@ var inicio = function () {
     );
     map.addLayer(layerMapaUSAWMS);
 
+    // capas utilizando servicios web WMS (Web Map Service) http://localhost:8080/geoserver
+    var layerMapaEolico = new OpenLayers.Layer.WMS(
+        "Mapa Eolico",                // se pasa un nombre del layer
+        "http://localhost:8080/geoserver/wms",  // url del servicio geoserver local
+        {
+            layers: 'curso-gis:EOLICO',
+            transparent: true   // si se pone en false, este layer se usa como un layer adicional
+        }
+    );
+    map.addLayer(layerMapaEolico);
+
+    // layer tipo JSON
+    var layerJson = new OpenLayers.Layer.Vector(
+        "Capa Areas protegidas Json",     // nombre de la capa
+        {
+            projection: new OpenLayers.Projection("EPSG:4326"),   // se pone la proyeccion con la que se genero el Geojson
+            strategies: [new OpenLayers.Strategy.Fixed()], // similar a CSS position fixed
+            protocol: new OpenLayers.Protocol.HTTP({
+                url: './ap_nacionales.json',      // ubicacion del archivo geojson
+                format: new OpenLayers.Format.GeoJSON()
+            })
+        }
+    );
+    map.addLayer(layerJson);
+
     // configuracion para mostrar la region de Bolivia
     // Lon: -64.819336, Lat: -17.37999
     // con lon, lat se debe hacer una transformacion de la proyeccion
