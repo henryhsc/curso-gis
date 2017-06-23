@@ -66,16 +66,27 @@ var inicio = function () {
 
     map.addLayer(layerMapBox);
 
-    // capas utilizando servicios web WMS (Web Map Service)
+    // capas utilizando servicios web WMS (Web Map Service) http://geo.gob.bo/geoserver
     var layerDepartamentosWMS = new OpenLayers.Layer.WMS(
         "Limites departamentales Bolivia",                // se pasa un nombre del layer
         "http://geo.gob.bo/geoserver/wms",     // url del servicio a consumir
         {
-            layers: 'fondos:departamento1',     // workspace:capa
+            layers: 'fondos:departamento1',     // workspace:capa   //layers: 'universidades:flisol_2014',
             transparent: true   // si se pone en false, este layer se usa como un layer adicional
         }
     );
     map.addLayer(layerDepartamentosWMS);
+
+    // capas utilizando servicios web WMS (Web Map Service) http://localhost:8080/geoserver
+    var layerMapaUSAWMS = new OpenLayers.Layer.WMS(
+        "Mapa USA WMS",                // se pasa un nombre del layer
+        "http://localhost:8080/geoserver/wms",  // url del servicio geoserver local
+        {
+            layers: 'topp:states',
+            transparent: true   // si se pone en false, este layer se usa como un layer adicional
+        }
+    );
+    map.addLayer(layerMapaUSAWMS);
 
     // configuracion para mostrar la region de Bolivia
     // Lon: -64.819336, Lat: -17.37999
