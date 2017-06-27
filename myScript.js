@@ -126,6 +126,19 @@ var inicio = function () {
     map.addLayer(layerJson);
     layerJson.setVisibility(false);
 
+    // capas utilizando servicios web WMS (Web Map Service) http://localhost:8080/geoserver
+    // consumimos capa desde POSTGIS
+    var layerPostGisEolico = new OpenLayers.Layer.WMS(
+        "Mapa Eolico POSTGIS",                // se pasa un nombre del layer
+        "http://"+host+":8080/geoserver/wms",  // url del servicio geoserver local
+        {
+            layers: 'curso-gis:postgis-eolico',
+            transparent: true   // si se pone en false, este layer se usa como un layer adicional
+        }
+    );
+    map.addLayer(layerPostGisEolico);
+    layerPostGisEolico.setVisibility(false);
+
     // configuracion para mostrar la region de Bolivia
     // Lon: -64.819336, Lat: -17.37999
     // con lon, lat se debe hacer una transformacion de la proyeccion
