@@ -2,6 +2,7 @@ var inicio = function () {
     // variable de acceso a localhost
     //var host = "192.168.43.231";
     var host = "localhost";    // 'localhost'
+    OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
 
     // CONFIGURACIONES ADICIONALES
     OpenLayers.DOTS_PER_INCH = 90.71428571428572;    // valor recomendado para ajuste DPI
@@ -32,7 +33,12 @@ var inicio = function () {
             controlFuente
         ],
         // inicialmente el zoom maximo es diferente para cada mapa, definimos un numero standar pero no aplica a mapas que no tienen ese nivel de zoom
-        numZoomLevels: 21
+        numZoomLevels: 21,
+        // para fijar el recuadro en el mapa (opcional)
+        /*restrictedExtent: new OpenLayers.Bounds(-72.66, -23.81, -56.36, -8.81).transform(
+            new OpenLayers.Projection("EPSG:4326"),
+            new OpenLayers.Projection("EPSG:900913"),
+        )*/
         // maxResolution: resolucion recomendada 196543.0339
     };
     var map = new OpenLayers.Map("miMapa", propiedades);     // parametro: el ID del contenedor
@@ -232,7 +238,6 @@ var inicio = function () {
         new OpenLayers.Projection("EPSG:4326"),
         map.getProjection()
     );
-
     map.setCenter(centroBoxTransform, zoom);
 }
 // iniciamos la funcion para desplegar el mapa
