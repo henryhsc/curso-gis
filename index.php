@@ -15,9 +15,9 @@ session_start();
 
     <!-- USAMOS LA VERSION 2.12 DE OPENLAYERS -->
     <!-- cuando se carga desde un geoserver se puede quitar "https:" en caso de que haya problemas -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/theme/default/style.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/theme/default/style.min.css"> -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/OpenLayers.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/OpenLayers.min.js"></script> -->
     <script src="js/jquery-2.2.4.min.js"></script>
     <script src="js/bootstrap.min.js"></script> -->
     <!-- <link rel="stylesheet" href="style.css">
@@ -66,6 +66,6 @@ session_start();
             <div id="info-mapa"></div>
         </div>
     </div>
-    <script src="js/myScript.js"></script>
+    <script src="js/myScriptLeaflet.js"></script>
 </body>
 </html>
