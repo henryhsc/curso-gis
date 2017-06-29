@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ALL);
-define("UPLOAD_DIR", "/var/www/curso-gis/uploads/");
-
+define("UPLOAD_DIR", "/var/www/html/curso-gis/uploads/");
+session_start();
 if (!empty($_FILES["myFile"])) {
 
     $myFile = $_FILES["myFile"];
@@ -10,7 +10,7 @@ if (!empty($_FILES["myFile"])) {
     for ($i = 0; $i < $fileCount; $i++) {
 
         if ($myFile["error"][$i] !== UPLOAD_ERR_OK) {
-            echo "<p>An error occurred.</p>";
+            echo "<p>ocurrio un error.</p>";
             exit;
         }
         // ensure a safe filename
@@ -26,7 +26,7 @@ if (!empty($_FILES["myFile"])) {
         $success = move_uploaded_file($myFile["tmp_name"][$i],
             UPLOAD_DIR . $name);
         if (!$success) {
-            echo "<p>Unable to save file.</p>";
+            echo "<p>No se puede guardar el/los archivos.</p>";
             exit;
         }
         // set proper permissions on the new file

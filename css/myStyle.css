@@ -1,0 +1,25 @@
+/*html, body{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}*/
+.cabecera{
+    height: 50px;
+    background-color: #336699;
+    top: 15px;
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: bold;
+    border-radius: 15px;
+}
+#miMapa{
+    /*position: relative;*/
+    top: 30px;
+    /*left: 100px;*/
+    margin: auto;
+    height: 500px;
+    width: 960px;
+    border: solid 3px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px 3px #336699;
+}
