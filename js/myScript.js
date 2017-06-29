@@ -2,11 +2,24 @@ var inicio = function () {
     // variable de acceso a localhost
     //var host = "192.168.43.231";
     var host = "localhost";    // 'localhost'
+
+    // CONFIGURACIONES ADICIONALES
+    OpenLayers.DOTS_PER_INCH = 90.71428571428572;    // valor recomendado para ajuste DPI
+    OpenLayers.Util.onImageLoadErrorColor= 'transparent';   // se define si hay un error cargando capas (para evitar mosaicos rosados)
+
     // tipo de proyeccion del mapa
     var proyeccion = new OpenLayers.Projection('EPSG:900913');    // se usa EPSG:4326 y si hay problemas se usa EPSG:900913
     var proyeccion2 = new OpenLayers.Projection("EPSG:4326");
     var controlNavegacion = new OpenLayers.Control.Navigation();
     var controlZoom = new OpenLayers.Control.PanZoomBar();   // un estilo
+    // para control touch en dispositivos moviles
+    var controlTouch = new OpenLayers.Control.TouchNavigation({
+        dragPanOptions:{enableKinetic:true}
+    });
+    // personalizar fuentes para mapa y layers
+    var controlFuente = new OpenLayers.Control.Attribution({
+    	template:"<span style='color:darkblue;font-weight:bold;'>Curso GIS - Postgrado en Informática</span>"
+    });
     //var controlZoom = new OpenLayers.Control.Zoom();    // un estilo mas sencillo
     var propiedades = {
         projection: proyeccion,
@@ -14,14 +27,15 @@ var inicio = function () {
         units: 'm',     // metros
         controls: [
             controlNavegacion,
-            controlZoom
+            controlZoom,
+            controlTouch,
+            controlFuente
         ],
         // inicialmente el zoom maximo es diferente para cada mapa, definimos un numero standar pero no aplica a mapas que no tienen ese nivel de zoom
         numZoomLevels: 21
+        // maxResolution: resolucion recomendada 196543.0339
     };
     var map = new OpenLayers.Map("miMapa", propiedades);     // parametro: el ID del contenedor
-
-
 
     // control para intercambio de capas
     var controlCapas = new OpenLayers.Control.LayerSwitcher();
@@ -198,13 +212,28 @@ var inicio = function () {
     // configuracion para mostrar la region de Bolivia
     // Lon: -64.819336, Lat: -17.37999
     // con lon, lat se debe hacer una transformacion de la proyeccion
+
+    // PRIMERA FORMA
     var LonLat = new OpenLayers.LonLat(-65.093994, -16.715475);
     var zoom = 5;
     var LonLatTransformado = LonLat.transform(
         new OpenLayers.Projection("EPSG:4326"),     // proyeccion origen
         map.getProjection() //new OpenLayers.Projection("EPSG:900913")    // proyeccion destino
     );
-    map.setCenter(LonLatTransformado, zoom); // parametros (Longitud,Latitud), nivel de zoom
+    //map.setCenter(LonLatTransformado, zoom); // parametros (Longitud,Latitud), nivel de zoom
+
+    // SEGUNDA FORMA
+    // se utiliza el sitio http://boundingbox.klokantech.com/
+    // para demarcar un recuadro y fijar al mapa
+    var regionBox = new OpenLayers.Bounds(-72.66, -23.81, -56.36, -8.81);
+    // obtenemos el centro
+    var centroRegion = regionBox.getCenterLonLat();
+    var centroBoxTransform = centroRegion.transform(
+        new OpenLayers.Projection("EPSG:4326"),
+        map.getProjection()
+    );
+
+    map.setCenter(centroBoxTransform, zoom);
 }
 // iniciamos la funcion para desplegar el mapa
 window.onload = inicio;
