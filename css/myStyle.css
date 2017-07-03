@@ -12,7 +12,7 @@
     font-weight: bold;
     border-radius: 15px;
 }
-#miMapa{
+.miMapa{
     /*position: relative;*/
     top: 30px;
     /*left: 100px;*/
@@ -22,7 +22,4 @@
     border: solid 3px;
     border-radius: 15px;
     box-shadow: 5px 5px 5px 3px #336699;
-}
-.contenedor-layer{
-    height: 500px;
 }

@@ -1,12 +1,25 @@
+// variable de acceso a localhost
+//var host = "192.168.43.231";
+var host = "localhost";    // 'localhost'
+
 $(document).ready(function(){
-    //inicioOL();
     inicioLeaflet();
+    inicioOL();
+    $('#miMapaLeaflet').hide();
+    //$('#miMapaOL').hide();
+
+    $('#btn-ol').click(function(){
+        $('#miMapaLeaflet').hide();
+        $('#miMapaOL').show();
+    });
+    $('#btn-leaflet').click(function(){
+        $('#miMapaLeaflet').show();
+        $('#miMapaOL').hide();
+    });
 });
 
 var inicioOL = function () {
-    // variable de acceso a localhost
-    //var host = "192.168.43.231";
-    var host = "localhost";    // 'localhost'
+    console.log('inicio OpenStreetMap');
     //OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
 
     // CONFIGURACIONES ADICIONALES
@@ -154,7 +167,7 @@ var inicioOL = function () {
         "Mapa Eolico POSTGIS",                // se pasa un nombre del layer
         "http://"+host+":8080/geoserver/wms",  // url del servicio geoserver local
         {
-            layers: 'curso-gis:postgis-eolico',
+            layers: 'curso-gis:tbl_eolico_shp',
             transparent: true   // si se pone en false, este layer se usa como un layer adicional
         }
     );
@@ -244,52 +257,4 @@ var inicioOL = function () {
         map.getProjection()
     );
     map.setCenter(centroBoxTransform, zoom);
-}
-var inicioLeaflet = function(){
-    console.log('inicio leaflet');
-    var mapaLeaflet = new L.Map('miMapaLeaflet', {
-       center: new L.LatLng(-17.379999,-64.819336),
-       zoom: 5,
-       attributionControl:true,
-       zoomControl:true,
-       minZoom:1
-   });
-
-   var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-   var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-   var osm = new L.TileLayer(osmUrl, {
-       minZoom: 1,
-       maxZoom: 19,
-       attribution: osmAttrib
-   });
-   mapaLeaflet.addLayer(osm);
-
-   var wmsLayer1= L.tileLayer.wms("http://geo.gob.bo/geoserver/wms", {
-       layers: 'fondos:departamento1',
-       format: 'image/png',
-       transparent: true
-   });
-   var wmsLayer2= L.tileLayer.wms("http://geo.gob.bo/geoserver/wms", {
-       layers: 'mde:EstabEducativos-cluster',
-       format: 'image/png',
-       transparent: true
-   });
-   var wmsLayer3= L.tileLayer.wms("http://geo.gob.bo/geoserver/wms", {
-       layers: 'fondos:comunidades_2012',
-       format: 'image/png',
-       transparent: true
-   });
-   mapaLeaflet.addLayer(wmsLayer1);
-   mapaLeaflet.addLayer(wmsLayer2);
-   mapaLeaflet.addLayer(wmsLayer3);
-
-   var base = {
-       "OSM": osm
-   };
-   superpuestas = {
-       "Límites departamentales":wmsLayer1,
-       "Centros Educativos":wmsLayer2,
-       "Comunidades":wmsLayer3
-   };
-   L.control.layers(base, superpuestas).addTo(mapaLeaflet);
 }

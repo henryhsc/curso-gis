@@ -9,6 +9,11 @@ session_start();
     <!-- dise;o responsivo -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
+    <!-- libreria Leaflet -->
+    <link rel="stylesheet" href="css/leaflet.css"/>
+    <script src="js/leaflet.js"></script>
+    <script src="js/leaflet-providers.js"></script>
+
     <!-- USAMOS LA VERSION 2.12 DE OPENLAYERS -->
     <!-- cuando se carga desde un geoserver se puede quitar "https:" en caso de que haya problemas -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/theme/default/style.min.css">
@@ -17,9 +22,7 @@ session_start();
     <script src="js/jquery-2.2.4.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
-    <!-- libreria Leaflet -->
-    <link rel="stylesheet" href="css/leaflet.css"/>
-    <script src="js/leaflet.js"></script>
+
 
     <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="css/myStyle.css">
@@ -35,12 +38,13 @@ session_start();
             <div class="col-md-6 col-xs-12">
                 <div class="cabecera text-center">
                     Visor Geografico multicapa Open Layers<hr>
-                    <button class="btn btn-primary">OpenLayers</button>
-                    <button class="btn btn-info">LeafLet</button>
+                    <button id="btn-ol" class="btn btn-primary">OpenLayers</button>
+                    <button id="btn-leaflet" class="btn btn-info">LeafLet</button>
                 </div>
             </div>
             <div class="col-md-4 col-xs-12"></div>
         </div>
+        <hr>
     </section>
     <div class="row">
         <div class="col-md-2 col-xs-12">
@@ -59,14 +63,14 @@ session_start();
             </form>
         </div>
         <div class="col-md-6 col-xs-12">
-            <div id="miMapaOL" class="contenedor-layer"></div>
-
+            <div id="miMapaLeaflet" class="miMapa"></div><hr>
+            <div id="miMapaOL" class="miMapa"></div>
         </div>
         <div class="col-md-4 col-xs-12">
             <div id="info-mapa"></div>
-            <div id="miMapaLeaflet" class="cobtenedor-layer"></div>
         </div>
     </div>
     <script src="js/myScript.js"></script>
+    <script src="js/myScriptLeaflet.js"></script>
 </body>
 </html>
