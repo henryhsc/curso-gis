@@ -1,8 +1,13 @@
-var inicio = function () {
+$(document).ready(function(){
+    //inicioOL();
+    inicioLeaflet();
+});
+
+var inicioOL = function () {
     // variable de acceso a localhost
     //var host = "192.168.43.231";
     var host = "localhost";    // 'localhost'
-    OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
+    //OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
 
     // CONFIGURACIONES ADICIONALES
     OpenLayers.DOTS_PER_INCH = 90.71428571428572;    // valor recomendado para ajuste DPI
@@ -41,7 +46,7 @@ var inicio = function () {
         )*/
         // maxResolution: resolucion recomendada 196543.0339
     };
-    var map = new OpenLayers.Map("miMapa", propiedades);     // parametro: el ID del contenedor
+    var map = new OpenLayers.Map("miMapaOL", propiedades);     // parametro: el ID del contenedor
 
     // control para intercambio de capas
     var controlCapas = new OpenLayers.Control.LayerSwitcher();
@@ -195,7 +200,7 @@ var inicio = function () {
         format: new OpenLayers.Format.JSON,*/
         eventListeners: {
             getfeatureinfo: function(event){
-                var popup = new OpenLayers.Popup.FramedCloud(
+                /*var popup = new OpenLayers.Popup.FramedCloud(
                     'Popup',    // id: strins
                     map.getLonLatFromPixel(event.xy),   // lonlat: OpenLayers.LonLat
                     null,   // contentSize: OpenLayers.Size
@@ -204,8 +209,9 @@ var inicio = function () {
                     true    // closeBox: boolean
                     // closeBoxCallBack: Function to be called con closeBox click
                 );
-                console.dir( event.features );
-                map.addPopup(popup);
+                map.addPopup(popup);*/
+                console.dir( event );
+                console.log(event.xy);
                 var info = $("#info-mapa");
                 var posicion = map.getLonLatFromPixel(event.xy);
                 info.html(posicion.lon +" | "+ posicion.lat);
@@ -240,5 +246,54 @@ var inicio = function () {
     );
     map.setCenter(centroBoxTransform, zoom);
 }
+var inicioLeaflet = function(){
+    var mapaLeaflet = new L.Map('miMapaLeaflet', {
+       center: new L.LatLng(-17.379999,-64.819336),
+       zoom: 5,
+       attributionControl:true,
+       zoomControl:true,
+       minZoom:1
+   });
+
+   var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+   var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+   var osm = new L.TileLayer(osmUrl, {
+       minZoom: 1,
+       maxZoom: 19,
+       attribution: osmAttrib
+   });
+   mapaLeaflet.addLayer(osm);
+
+   var wmsLayer1= L.tileLayer.wms("http://geo.gob.bo/geoserver/wms", {
+       layers: 'fondos:departamento1',
+       format: 'image/png',
+       transparent: true
+   });
+   var wmsLayer2= L.tileLayer.wms("http://geo.gob.bo/geoserver/wms", {
+       layers: 'mde:EstabEducativos-cluster',
+       format: 'image/png',
+       transparent: true
+   });
+   var wmsLayer3= L.tileLayer.wms("http://geo.gob.bo/geoserver/wms", {
+       layers: 'fondos:comunidades_2012',
+       format: 'image/png',
+       transparent: true
+   });
+   mapaLeaflet.addLayer(wmsLayer1);
+   mapaLeaflet.addLayer(wmsLayer2);
+   mapaLeaflet.addLayer(wmsLayer3);
+
+   var base = {
+       "OSM": osm
+   };
+   superpuestas = {
+       "Límites departamentales":wmsLayer1,
+       "Centros Educativos":wmsLayer2,
+       "Comunidades":wmsLayer3
+   };
+   L.control.layers(base, superpuestas).addTo(mapaLeaflet);
+}
+
 // iniciamos la funcion para desplegar el mapa
-window.onload = inicio;
+//window.onload = inicioOL;
+//window.onload = inicioLeaflet;

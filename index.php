@@ -16,8 +16,10 @@ session_start();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/OpenLayers.min.js"></script>
     <script src="js/jquery-2.2.4.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <!-- <link rel="stylesheet" href="style.css">
-    <script src="OpenLayers.js"></script> -->
+
+    <!-- libreria Leaflet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.1.0/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.1.0/leaflet.js"></script>
 
     <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="css/myStyle.css">
@@ -32,7 +34,9 @@ session_start();
             <div class="col-md-2 col-xs-12"></div>
             <div class="col-md-6 col-xs-12">
                 <div class="cabecera text-center">
-                    Visor Geografico multicapa Open Layers
+                    Visor Geografico multicapa Open Layers<hr>
+                    <button class="btn btn-primary">OpenLayers</button>
+                    <button class="btn btn-info">LeafLet</button>
                 </div>
             </div>
             <div class="col-md-4 col-xs-12"></div>
@@ -55,7 +59,8 @@ session_start();
             </form>
         </div>
         <div class="col-md-6 col-xs-12">
-            <div id="miMapa"></div>
+            <div id="miMapaOL" class="contenedor-layer"></div>
+            <div id="miMapaLeaflet" class="cobtenedor-layer"></div>
         </div>
         <div class="col-md-4 col-xs-12">
             <div id="info-mapa"></div>
