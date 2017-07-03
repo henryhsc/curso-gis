@@ -18,8 +18,8 @@ session_start();
     <script src="js/bootstrap.min.js"></script>
 
     <!-- libreria Leaflet -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.1.0/leaflet.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.1.0/leaflet.js"></script>
+    <link rel="stylesheet" href="css/leaflet.css"/>
+    <script src="js/leaflet.js"></script>
 
     <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="css/myStyle.css">
@@ -60,10 +60,11 @@ session_start();
         </div>
         <div class="col-md-6 col-xs-12">
             <div id="miMapaOL" class="contenedor-layer"></div>
-            <div id="miMapaLeaflet" class="cobtenedor-layer"></div>
+
         </div>
         <div class="col-md-4 col-xs-12">
             <div id="info-mapa"></div>
+            <div id="miMapaLeaflet" class="cobtenedor-layer"></div>
         </div>
     </div>
     <script src="js/myScript.js"></script>

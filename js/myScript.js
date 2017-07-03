@@ -189,7 +189,6 @@ var inicioOL = function () {
         layerPostGisRios
     ]);
 
-    console.log('creamos featureInfo');
     var featureInfo =  new OpenLayers.Control.WMSGetFeatureInfo({
         //url: 'http://' + host + ':8080/geoserver/wms',
         title: 'Identifica propiedades JSON',
@@ -247,6 +246,7 @@ var inicioOL = function () {
     map.setCenter(centroBoxTransform, zoom);
 }
 var inicioLeaflet = function(){
+    console.log('inicio leaflet');
     var mapaLeaflet = new L.Map('miMapaLeaflet', {
        center: new L.LatLng(-17.379999,-64.819336),
        zoom: 5,
@@ -293,7 +293,3 @@ var inicioLeaflet = function(){
    };
    L.control.layers(base, superpuestas).addTo(mapaLeaflet);
 }
-
-// iniciamos la funcion para desplegar el mapa
-//window.onload = inicioOL;
-//window.onload = inicioLeaflet;
