@@ -5,7 +5,7 @@ session_start();
 <html lang="es">
 <head>
     <meta charset="utf-8">
-    <title>Curso GIS - visor simple Open Layers</title>
+    <title>Curso Taller GIS - visor geográfico</title>
     <!-- dise;o responsivo -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -37,7 +37,7 @@ session_start();
             <div class="col-md-2 col-xs-12"></div>
             <div class="col-md-6 col-xs-12">
                 <div class="cabecera text-center">
-                    Visor Geografico multicapa Open Layers<hr>
+                    Visor Geografico multicapa<hr>
                     <button id="btn-ol" class="btn btn-primary">OpenLayers</button>
                     <button id="btn-leaflet" class="btn btn-info">LeafLet</button>
                 </div>

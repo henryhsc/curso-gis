@@ -9,18 +9,18 @@ $(document).ready(function(){
     //$('#miMapaOL').hide();
 
     $('#btn-ol').click(function(){
-        $('#miMapaLeaflet').hide();
-        $('#miMapaOL').show();
+        $('#miMapaLeaflet').hide('slow');
+        $('#miMapaOL').show('slow');
     });
     $('#btn-leaflet').click(function(){
-        $('#miMapaLeaflet').show();
-        $('#miMapaOL').hide();
+        $('#miMapaLeaflet').show('slow');
+        $('#miMapaOL').hide('slow');
     });
 });
 
 var inicioOL = function () {
     console.log('inicio OpenStreetMap');
-    //OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
+    OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
 
     // CONFIGURACIONES ADICIONALES
     OpenLayers.DOTS_PER_INCH = 90.71428571428572;    // valor recomendado para ajuste DPI
@@ -125,6 +125,18 @@ var inicioOL = function () {
         visibilidad
     );
 
+    // capa utilizando servicio web WMS geo.gob.bo/geoserver
+    var layerInundacionesWMS = new OpenLayers.Layer.WMS(
+        "Inundaciones a nivel nacional",                // se pasa un nombre del layer
+        "http://geo.gob.bo/geoserver/wms",     // url del servicio a consumir
+        {
+            layers: 'mdpdd:Inundacion',     // workspace:capa   //layers: 'universidades:flisol_2014',
+            transparent: true   // si se pone en false, este layer se usa como un layer adicional
+        },
+        visibilidad
+    );
+    layerInundacionesWMS.setVisibility(false);
+
     // capas utilizando servicios web WMS (Web Map Service) http://localhost:8080/geoserver
     var layerMapaUSAWMS = new OpenLayers.Layer.WMS(
         "Mapa USA WMS",                // se pasa un nombre del layer
@@ -154,7 +166,7 @@ var inicioOL = function () {
             projection: new OpenLayers.Projection("EPSG:4326"),   // se pone la proyeccion con la que se genero el Geojson
             strategies: [new OpenLayers.Strategy.Fixed()], // similar a CSS position fixed
             protocol: new OpenLayers.Protocol.HTTP({
-                url: './ap_nacionales.json',      // ubicacion del archivo geojson (puede ser 'http://localhost/curso-gis/ap_nacionales.json')
+                url: './uploads/ap_nacionales.json',      // ubicacion del archivo geojson (puede ser 'http://localhost/curso-gis/ap_nacionales.json')
                 format: new OpenLayers.Format.GeoJSON()
             })
         }
@@ -195,6 +207,7 @@ var inicioOL = function () {
         layerMapBox,
         // OVERLAYS
         layerDepartamentosWMS,
+        layerInundacionesWMS,
         layerMapaUSAWMS,
         layerMapaEolico,
         layerAPJson,

@@ -8,8 +8,11 @@ var inicioLeaflet = function(){
        minZoom:1
    });
 
+   // se puede encontrar todos los mapas en https://leaflet-extras.github.io/leaflet-providers/preview/
+
    //var layerNatGeo = L.tileLayer.provider('Esri.NatGeoWorldMap');
-   var layerNatGeo = L.tileLayer.provider('Esri.WorldImagery');
+   //var layerNatGeo = L.tileLayer.provider('Esri.WorldImagery');
+   var layerNatGeo = L.tileLayer.provider('OpenTopoMap');
    mapaL.addLayer(layerNatGeo);
 
    // capas de transparencia
