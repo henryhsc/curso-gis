@@ -11,8 +11,8 @@ var inicioLeaflet = function(){
    // se puede encontrar todos los mapas en https://leaflet-extras.github.io/leaflet-providers/preview/
 
    //var layerNatGeo = L.tileLayer.provider('Esri.NatGeoWorldMap');
-   //var layerNatGeo = L.tileLayer.provider('Esri.WorldImagery');
-   var layerNatGeo = L.tileLayer.provider('OpenTopoMap');
+   var layerNatGeo = L.tileLayer.provider('Esri.WorldImagery');
+   //var layerNatGeo = L.tileLayer.provider('OpenTopoMap');
    mapaL.addLayer(layerNatGeo);
 
    // capas de transparencia
@@ -55,7 +55,10 @@ var inicioLeaflet = function(){
        var capa = L.geoJson(
            data,
            {
-               onEachFeature: onEachFeature
+               onEachFeature: onEachFeature,
+               style: {
+                   color: '#0099ff'
+               }
            }
        );
        capa.addTo(map);
